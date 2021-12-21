@@ -16,11 +16,16 @@ var enemyAttack = 12;
 // console.log(enemyNames[2])
 // console.log(enemyNames.length)
 
-for(var i = 0; i < enemyNames.length; i++) {
-    console.log(enemyNames[i]);
-    console.log(i);
-    console.log(enemyNames[i] + " is at " + i + " index");
-}
+// for(var i = 0; i < enemyNames.length; i++) {
+//     if (playerHealth > 0) {
+//         window.alert("Welcome to Robot Gladiators! Round " + (i + 1));
+
+//         var pickedEnemyName
+//     }
+//     // console.log(enemyNames[i]);
+//     // console.log(i);
+//     // console.log(enemyNames[i] + " is at " + i + " index");
+// }
 
 // Game States
 // "WIN" - Player defeats all the enemy robots
@@ -28,9 +33,9 @@ for(var i = 0; i < enemyNames.length; i++) {
 //      * Defeat all enemy robots
 // "LOSE" - Player's robot health is 0 or less
 
-//window.alert("Welcome to Robot Gladiators!");
-
 var fight = function(enemyName) {
+
+    //window.alert("Welcome to Robot Gladiators!");
 
     // repeat and execute as lon as both robots are alive
     while(enemyHealth > 0 && playerHealth > 0) {
@@ -98,7 +103,16 @@ var fight = function(enemyName) {
 }
 
 for (var i = 0; i < enemyNames.length; i++) {
-    var pickedEnemyNam = enemyNames[i];
-    enemyHealth = 50;
-    fight(enemyNames[i]);
+    if (playerHealth > 0) {
+        window.alert("Welcome to Robot Gladiators! Round " + (i + 1));
+
+        var pickedEnemyName = enemyNames[i];
+        enemyHealth = 50;
+        debugger;
+        fight(pickedEnemyName);
+    }
+    else {
+        window.alert("You have lost your robot in battle! Game Over.")
+        break;
+    }
 }
