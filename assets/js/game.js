@@ -96,11 +96,20 @@ var startGame = function() {
         enemyHealth = 50;
 
         // use debugger to pause script from running and check what's going on at that moment in the code
-        // debugger;
+        debugger;
 
         // pass the pickedEnemyName variable's value into the fight function, where it will assume the value of the enemyName parameter
         fight(pickedEnemyName);
         }
+
+        // Ask if the player wants to enter the store
+        if (playerHealth > 0 && i < enemyNames.length - 1){
+          var storeConfirm = window.confirm("The fight is over. Visit the store before the next round?")
+          if (storeConfirm){
+          shop();
+          }
+      }
+
     // if player isn't alive, stop the game
     else {
         window.alert('You have lost your robot in battle! Game Over!');
@@ -125,6 +134,45 @@ var endGame = function() {
     } else {
         window.alert("Thanks for playing Robot Gladiators! Come back soon!");
     }
+};
+
+var shop = function() {
+  var shopOptionPrompt = window.prompt("Would you like to REFILL health, UPGRADE your attack, or LEAVE the store. Please enter 'REFILL', 'UPGRADE', or 'LEAVE' to decide.");
+
+  switch (shopOptionPrompt) {
+    case "refill":
+    case "REFILL":
+    case "Refill":
+      if (playerMoney >= 7) {
+      window.alert("Refilling " + playerName + "'s health by 20 for 7 dollars.");
+      playerHealth = playerHealth + 20;
+      playerMoney = playerMoney - 7;
+      }else{
+        window.alert("You don't have enough money!");
+      }
+      break;
+    case "upgrade":
+    case "UPGRADE":
+    case "Upgrade":
+      if (playerMoney >= 7) {
+      window.alert("Upgrading " + playerName + "'s attack by 6 for 7 dollars.");
+      playerAttack = playerAttack + 6;
+      playerMoney = playerMoney - 7;
+      }else{
+        window.alert("You don't have enough money!");
+      }
+      break;
+    case "leave":
+    case "LEAVE":
+    case "Leave":
+      window.alert("Leaving the store.");
+      break;
+    default:
+      window.alert("Please pick a valid option.")
+      shop();
+      break;
+  }
+
 };
 
 // start the game when the page loads
