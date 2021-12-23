@@ -1,26 +1,61 @@
+var fightOrSkip = function() {
+
+  var promptFight = window.prompt('Would you like to FIGHT or SKIP this battle? Enter "FIGHT" or "SKIP" to choose.');
+
+  if (promptFight === "" || promptFight === null) {
+  window.alert("You need to provide a valid answer! Please try again.");
+  return fightOrSkip();
+  }
+  promptFight = promptFight.toLowerCase();
+
+  if (promptFight === "skip") {
+    var confirmSkip = window.confirm("Are you suuuuure you'd like to quit?")
+
+    if (confirmSkip) {
+      window.alert(playerInfo.name + " has decided to skip this fight. Lame.");
+      playerInfo.money = Math.max(0, playerInfo.money - 10);
+
+      return true;
+      shop();
+
+    } 
+      window.alert("Well then, enjoy the fight!")
+      return false;
+  }
+
+  if (promptFight !== "fight") {
+    {
+      window.alert("Looks like you have a typo. Hey, just try again!");
+      return fightOrSkip();
+      }
+  }
+}
+
 // fight function (now with parameter for enemy's name)
 var fight = function(enemy) {
   while (playerInfo.health > 0 && enemy.health > 0) {
     // ask player if they'd like to fight or run
-    var promptFight = window.prompt('Would you like to FIGHT or SKIP this battle? Enter "FIGHT" or "SKIP" to choose.');
-
-    // if player picks "skip" confirm and then stop the loop
-    if (promptFight === "skip" || promptFight === "SKIP") {
-      // confirm player wants to skip
-      var confirmSkip = window.confirm("Are you suuuuure you'd like to quit?");
-
-      // if yes (true), leave fight
-      if (confirmSkip) {
-        window.alert(playerInfo.name + ' has decided to skip this fight. Lame.');
-        // subtract money from playerInfo.money for skipping
-        playerInfo.money = Math.max(0, playerInfo.money - 10);
-        console.log("playerInfo.money", playerInfo.money);
-        break;
-      }
+    if (fightOrSkip()) {
+      break;
     }
+    
+    // if player picks "skip" confirm and then stop the loop
+    // if (promptFight === "skip" || promptFight === "SKIP") {
+    //   // confirm player wants to skip
+    //   var confirmSkip = window.confirm("Are you suuuuure you'd like to quit?");
+
+    //   // if yes (true), leave fight
+    //   if (confirmSkip) {
+    //     window.alert(playerInfo.name + ' has decided to skip this fight. Lame.');
+    //     // subtract money from playerInfo.money for skipping
+    //     playerInfo.money = Math.max(0, playerInfo.money - 10);
+    //     console.log("playerInfo.money", playerInfo.money);
+    //     break;
+    //   }
+    // }
 
     // remove enemy's health by subtracting the amount set in the playerInfo.attack variable
-    else if (promptFight === "Fight" || promptFight === "FIGHT" || promptFight === "fight") {
+    //if (promptFight === "Fight" || promptFight === "FIGHT" || promptFight === "fight") {
 
     var damage = randomNumber(playerInfo.attack - 3, playerInfo.attack);
 
@@ -58,10 +93,12 @@ var fight = function(enemy) {
     } else {
       window.alert(playerInfo.name + ' still has ' + playerInfo.health + ' health left.');
     }
-  } else {
-    window.alert("Please enter either FIGHT or SKIP.");
-  }
-  }
+  } 
+  
+  // else {
+  //   window.alert("Please enter either FIGHT or SKIP.");
+  // }
+  //}
 };
 
 //function start a new game
@@ -122,10 +159,10 @@ var endGame = function() {
 var shop = function() {
   var shopOptionPrompt = window.prompt("Would you like to REFILL health, UPGRADE your attack, or LEAVE the store. Please enter 'REFILL', 'UPGRADE', or 'LEAVE' to decide.");
 
+  shopOptionPrompt = shopOptionPrompt.toLowerCase();
+
   switch (shopOptionPrompt) {
     case "refill":
-    case "REFILL":
-    case "Refill":
       playerInfo.refillHealth();
       // if (playerInfo.money >= 7) {
       // window.alert("Refilling " + playerInfo.name + "'s health by 20 for 7 dollars.");
@@ -136,8 +173,6 @@ var shop = function() {
       // }
       break;
     case "upgrade":
-    case "UPGRADE":
-    case "Upgrade":
       playerInfo.upgradeAttack();
       // if (playerInfo.money >= 7) {
       // window.alert("Upgrading " + playerInfo.name + "'s attack by 6 for 7 dollars.");
@@ -148,8 +183,6 @@ var shop = function() {
       // }
       break;
     case "leave":
-    case "LEAVE":
-    case "Leave":
       window.alert("Leaving the store.");
       break;
     default:
