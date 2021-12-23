@@ -20,8 +20,9 @@ var fightOrSkip = function() {
 
     } 
       window.alert("Well then, enjoy the fight!")
-      return false;
+      
   }
+  return false;
 
   if (promptFight !== "fight") {
     {
@@ -29,7 +30,7 @@ var fightOrSkip = function() {
       return fightOrSkip();
       }
   }
-}
+};
 
 // fight function (now with parameter for enemy's name)
 var fight = function(enemy) {
