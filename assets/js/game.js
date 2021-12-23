@@ -42,6 +42,8 @@ var fight = function(enemy) {
 
   while (playerInfo.health > 0 && enemy.health > 0) {
 
+   
+
     if (isPlayerTurn) {
     // ask player if they'd like to fight or run
       if (fightOrSkip()) {
@@ -134,11 +136,25 @@ var startGame = function() {
 var endGame = function() {
   window.alert("The game has ended. Let's see how you did!")
 
-    if (playerInfo.health > 0) {
-        window.alert("Great job, you've survived the game! you now have a score of " + playerInfo.money + ".");
-    } else {
-        window.alert("You've lost your robot in battle.");
+    var highScore = localStorage.getItem("highscore");
+    if (highScore === null) {
+      highScore = 0;
     }
+
+    if (playerInfo.money > highScore) {
+      localStorage.setItem("highscore", playerInfo.money);
+      localStorage.setItem("name", playerInfo.name);
+
+      alert(playerInfo.name + " now has the high score of " + playerInfo.money + "!");
+    }else{
+      alert(playerInfo.name + " did not beat the high score of " + highScore + ". Maybe next time!");
+    }
+
+    // if (playerInfo.health > 0) {
+    //     window.alert("Great job, you've survived the game! you now have a score of " + playerInfo.money + ".");
+    // } else {
+    //     window.alert("You've lost your robot in battle.");
+    // }
     
     var playAgainConfirm = window.confirm("Would you like to play again?");
 
