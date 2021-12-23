@@ -38,25 +38,7 @@ var fight = function(enemy) {
     if (fightOrSkip()) {
       break;
     }
-    
-    // if player picks "skip" confirm and then stop the loop
-    // if (promptFight === "skip" || promptFight === "SKIP") {
-    //   // confirm player wants to skip
-    //   var confirmSkip = window.confirm("Are you suuuuure you'd like to quit?");
-
-    //   // if yes (true), leave fight
-    //   if (confirmSkip) {
-    //     window.alert(playerInfo.name + ' has decided to skip this fight. Lame.');
-    //     // subtract money from playerInfo.money for skipping
-    //     playerInfo.money = Math.max(0, playerInfo.money - 10);
-    //     console.log("playerInfo.money", playerInfo.money);
-    //     break;
-    //   }
-    // }
-
-    // remove enemy's health by subtracting the amount set in the playerInfo.attack variable
-    //if (promptFight === "Fight" || promptFight === "FIGHT" || promptFight === "fight") {
-
+  
     var damage = randomNumber(playerInfo.attack - 3, playerInfo.attack);
 
     enemy.health = Math.max(0, enemy.health - damage);
@@ -157,34 +139,23 @@ var endGame = function() {
 };
 
 var shop = function() {
-  var shopOptionPrompt = window.prompt("Would you like to REFILL health, UPGRADE your attack, or LEAVE the store. Please enter 'REFILL', 'UPGRADE', or 'LEAVE' to decide.");
+  var shopOptionPrompt = window.prompt("Would you like to REFILL health, UPGRADE your attack, or LEAVE the store. Please enter 1 to REFILL, 2 to UPGRADE, or 3 to LEAVE.");
 
-  shopOptionPrompt = shopOptionPrompt.toLowerCase();
+  shopOptionPrompt = parseInt(shopOptionPrompt);
 
   switch (shopOptionPrompt) {
-    case "refill":
+    case 1:
       playerInfo.refillHealth();
-      // if (playerInfo.money >= 7) {
-      // window.alert("Refilling " + playerInfo.name + "'s health by 20 for 7 dollars.");
-      // playerInfo.health = playerInfo.health + 20;
-      // playerInfo.money = playerInfo.money - 7;
-      // }else{
-      //   window.alert("You don't have enough money!");
-      // }
       break;
-    case "upgrade":
+
+    case 2:
       playerInfo.upgradeAttack();
-      // if (playerInfo.money >= 7) {
-      // window.alert("Upgrading " + playerInfo.name + "'s attack by 6 for 7 dollars.");
-      // playerInfo.attack = playerInfo.attack + 6;
-      // playerInfo.money = playerInfo.money - 7;
-      // }else{
-      //   window.alert("You don't have enough money!");
-      // }
       break;
-    case "leave":
+
+    case 3:
       window.alert("Leaving the store.");
       break;
+
     default:
       window.alert("Please pick a valid option.")
       shop();
